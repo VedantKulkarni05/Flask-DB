@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Add Student{% endblock %}
+{% block header_title %}Add Student{% endblock %}
+{% block header_subtitle %}Create a new record{% endblock %}
+{% block header_actions %}
+    <a class="btn" href="{{ url_for('index') }}">Back</a>
+{% endblock %}
+
+{% block content %}
+    <div class="card" style="max-width: 520px;">
+        <form method="POST">
+            <label for="name">Name</label>
+            <input class="input" type="text" id="name" name="name" required placeholder="Enter student name">
+
+            <label for="email">Email</label>
+            <input class="input" type="email" id="email" name="email" required placeholder="Enter email address">
+
+            <label for="course">Course</label>
+            <input class="input" type="text" id="course" name="course" required placeholder="Enter course name">
+
+            <div class="row" style="margin-top: 14px;">
+                <button type="submit" class="btn success">Add Student</button>
+                <a href="{{ url_for('index') }}" class="btn">Cancel</a>
+            </div>
+        </form>
+
+        <div class="footer-note" style="margin-top: 14px;">
+            Tip: input <span class="pill">name</span> attributes must match <span class="pill">request.form[...]</span> keys in Flask.
+        </div>
+    </div>
+{% endblock %}

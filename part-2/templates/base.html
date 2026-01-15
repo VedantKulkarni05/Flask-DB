@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Student Management{% endblock %}</title>
+    <style>
+        :root{
+            --bg: #f5f7fb;
+            --card: #ffffff;
+            --border: #e0e4f0;
+            --text: #1f2933;
+            --muted: #6b7280;
+            --primary: #2563eb;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --shadow: 0 16px 40px rgba(15,23,42,0.10);
+        }
+        *{ box-sizing: border-box; }
+        body{
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+            color: var(--text);
+            background:
+              radial-gradient(600px 320px at 0% 0%, rgba(59,130,246,0.10), transparent 60%),
+              radial-gradient(700px 360px at 100% 0%, rgba(52,211,153,0.10), transparent 60%),
+              var(--bg);
+            min-height: 100vh;
+        }
+        a{ color: inherit; }
+        .container{ max-width: 980px; margin: 0 auto; padding: 28px 18px 60px; }
+        .header{ display:flex; align-items:flex-start; justify-content:space-between; gap: 14px; margin-bottom: 18px; }
+        .title{ margin: 0; font-size: 24px; letter-spacing: .2px; }
+        .subtitle{ margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+        .card{
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+        }
+        .row{ display:flex; gap: 10px; flex-wrap: wrap; align-items:center; }
+        .spacer{ flex: 1 1 auto; }
+        .btn{
+            display:inline-flex; align-items:center; justify-content:center; gap: 8px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #eef2ff;
+            text-decoration:none;
+            cursor:pointer;
+            color: var(--text);
+            transition: transform .12s ease, background .12s ease, border-color .12s ease;
+            user-select:none;
+        }
+        .btn:hover{ transform: translateY(-1px); background: #e5e7eb; border-color: #cbd5f5; }
+        .btn.primary{ background: #2563eb; border-color: #2563eb; color: #ffffff; }
+        .btn.primary:hover{ background: #1d4ed8; }
+        .btn.success{ background: #16a34a; border-color: #16a34a; color: #ffffff; }
+        .btn.success:hover{ background: #15803d; }
+        .btn.danger{ background: #dc2626; border-color: #dc2626; color: #ffffff; }
+        .btn.danger:hover{ background: #b91c1c; }
+
+        .input{
+            width: 100%;
+            padding: 11px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: #ffffff;
+            color: var(--text);
+            outline: none;
+        }
+        .input::placeholder{ color: #9ca3af; }
+        .input:focus{ border-color: rgba(37,99,235,0.7); box-shadow: 0 0 0 3px rgba(37,99,235,0.20); }
+        label{ display:block; margin: 10px 0 6px; color: var(--muted); font-size: 13px; }
+
+        .flash-wrap{ margin: 14px 0; display:flex; flex-direction:column; gap: 10px; }
+        .flash{
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: #eef2ff;
+        }
+        .flash.success{ border-color: rgba(22,163,74,0.35); background: #ecfdf3; }
+        .flash.danger{ border-color: rgba(220,38,38,0.35); background: #fef2f2; }
+
+        table{ width: 100%; border-collapse: collapse; background: #ffffff; border-radius: 12px; overflow: hidden; }
+        th, td{ padding: 12px 10px; border-bottom: 1px solid var(--border); text-align:left; font-size: 14px; }
+        th{ color: #4b5563; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; background: #f3f4ff; }
+        tr:last-child td{ border-bottom: none; }
+        .muted{ color: var(--muted); }
+        .pill{
+            display:inline-flex; align-items:center;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: #eef2ff;
+            color: #4b5563;
+            font-size: 11px;
+        }
+        .footer-note{ margin-top: 16px; color: var(--muted); font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1 class="title">{% block header_title %}Student Management{% endblock %}</h1>
+                <p class="subtitle">{% block header_subtitle %}Full CRUD operations (SQLite + Flask){% endblock %}</p>
+            </div>
+            {% block header_actions %}{% endblock %}
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-wrap">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+
+        <div class="footer-note">
+            <span class="pill">Create</span>
+            <span class="pill">Read</span>
+            <span class="pill">Update</span>
+            <span class="pill">Delete</span>
+        </div>
+    </div>
+</body>
+</html>
+
