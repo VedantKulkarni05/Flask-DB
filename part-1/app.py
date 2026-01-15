@@ -64,7 +64,7 @@ def add_sample_student():
     Each request adds the next student from the sample list.
     """
 
-    # Predefined list of sample students
+    # Predefined list of sample students for Exercise 
     sample_students = [
         ("Student 1", "student1@example.com", "Flask + Databases"),
         ("Student 2", "student2@example.com", "Python for Beginners"),

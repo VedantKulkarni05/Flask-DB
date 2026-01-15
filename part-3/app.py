@@ -283,3 +283,4 @@ if __name__ == '__main__':
 # 2. Try different query methods: `filter()`, `order_by()`, `limit()`
 #
 # =============================================================================
+# As you know im exploring SQLite right now and we have already covered CRUD operations moving ahead i want to learn about Flask-SQLAlchemy ORM what it is and how to write queries with it Can you guide me through this
